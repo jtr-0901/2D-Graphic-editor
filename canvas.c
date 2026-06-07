@@ -60,3 +60,18 @@ void drawLine(int x1, int y1, int x2, int y2)
         y += yIncrement;
     }
 }
+
+void drawRectangle(int x, int y, int width, int height)
+{
+    // Top edge
+    drawLine(x, y, x + width, y);
+
+    // Bottom edge
+    drawLine(x, y + height, x + width, y + height);
+
+    // Left edge
+    drawLine(x, y, x, y + height);
+
+    // Right edge
+    drawLine(x + width, y, x + width, y + height);
+}
