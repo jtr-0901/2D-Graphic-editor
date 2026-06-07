@@ -3,10 +3,8 @@
 int main()
 {
     initializeCanvas();
-
-    drawLine(2, 2, 30, 15);
-
+    drawRectangle(2, 2, 15, 8);
+    drawTriangle(25, 2,15, 15,35, 15);
     displayCanvas();
-
     return 0;
 }
