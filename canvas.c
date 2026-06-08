@@ -82,3 +82,30 @@ void drawTriangle(int x1, int y1,int x2, int y2,int x3, int y3)
     drawLine(x2, y2, x3, y3);
     drawLine(x3, y3, x1, y1);
 }
+
+void plotCirclePoints(int xc, int yc, int x, int y)
+{
+    if(yc + y >= 0 && yc + y < ROWS && xc + x >= 0 && xc + x < COLS)
+        canvas[yc + y][xc + x] = '*';
+
+    if(yc + y >= 0 && yc + y < ROWS && xc - x >= 0 && xc - x < COLS)
+        canvas[yc + y][xc - x] = '*';
+
+    if(yc - y >= 0 && yc - y < ROWS && xc + x >= 0 && xc + x < COLS)
+        canvas[yc - y][xc + x] = '*';
+
+    if(yc - y >= 0 && yc - y < ROWS && xc - x >= 0 && xc - x < COLS)
+        canvas[yc - y][xc - x] = '*';
+
+    if(yc + x >= 0 && yc + x < ROWS && xc + y >= 0 && xc + y < COLS)
+        canvas[yc + x][xc + y] = '*';
+
+    if(yc + x >= 0 && yc + x < ROWS && xc - y >= 0 && xc - y < COLS)
+        canvas[yc + x][xc - y] = '*';
+
+    if(yc - x >= 0 && yc - x < ROWS && xc + y >= 0 && xc + y < COLS)
+        canvas[yc - x][xc + y] = '*';
+
+    if(yc - x >= 0 && yc - x < ROWS && xc - y >= 0 && xc - y < COLS)
+        canvas[yc - x][xc - y] = '*';
+}
