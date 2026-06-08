@@ -109,3 +109,28 @@ void plotCirclePoints(int xc, int yc, int x, int y)
     if(yc - x >= 0 && yc - x < ROWS && xc - y >= 0 && xc - y < COLS)
         canvas[yc - x][xc - y] = '*';
 }
+
+void drawCircle(int xc, int yc, int r)
+{
+    int x = 0;
+    int y = r;
+
+    int p = 1 - r;
+
+    while(x <= y)
+    {
+        plotCirclePoints(xc, yc, x, y);
+
+        x++;
+
+        if(p < 0)
+        {
+            p = p + 2 * x + 1;
+        }
+        else
+        {
+            y--;
+            p = p + 2 * x - 2 * y + 1;
+        }
+    }
+}
