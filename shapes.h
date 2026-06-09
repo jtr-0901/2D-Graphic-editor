@@ -2,6 +2,10 @@
 #define SHAPES_H
 
 #define MAX_SHAPES 100
+#define LINE 1
+#define RECTANGLE 2
+#define TRIANGLE 3
+#define CIRCLE 4
 
 typedef struct
 {
