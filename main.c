@@ -2,10 +2,19 @@
 
 int main()
 {
-    initializeCanvas();
-    drawRectangle(2,2,15,8);
-    drawTriangle(30,2,20,15,40,15);
-    drawCircle(60,10,7);
+    addRectangle(2,2,15,8);
+
+    addCircle(40,10,6);
+
+    redrawCanvas();
+
+    printf("Before Delete:\n");
     displayCanvas();
+
+    deleteShape(1);
+
+    printf("\nAfter Delete:\n");
+    displayCanvas();
+
     return 0;
 }
