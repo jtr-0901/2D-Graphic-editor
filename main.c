@@ -1,3 +1,4 @@
+// main.c
 #include <stdio.h>
 #include "canvas.h"
 #include "shapes.h"

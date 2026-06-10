@@ -1,3 +1,4 @@
+// canvas.h
 #ifndef CANVAS_H
 #define CANVAS_H
 #define ROWS 20

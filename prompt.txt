@@ -1,3 +1,4 @@
+// promt
 Give me a program(strictly in c).
 Write a 2d graphics editor using * and _. 
 Give me a 5 days daily push plan for the my repo.
