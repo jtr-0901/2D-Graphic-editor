@@ -1,0 +1,10 @@
+Give me a program(strictly in c).
+Write a 2d graphics editor using * and _. 
+Give me a 5 days daily push plan for the my repo.
+On each day wt part of program are we doing and pushing.
+U should just give the structure of the program each day so that i can think and implement myself.
+Also give me wt is the structure of the program.
+If there is any concept involved or any algorithm involved please give explaination and sample program for me to understang.
+Finally my program should be able to
+draw a circle, rectangle, line, and triangle on a canvas. 
+The program should be able to add objects to the canvas, delete objects from the canvas, and modify objects in the canvas. Use a 2d array of characters to store the picture.display the canvas.

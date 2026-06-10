@@ -1,26 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "canvas.h"
 
-char canvas[rows][cols];
+char canvas[ROWS][COLS];
+
+/* Initialize canvas with '_' */
 void initializeCanvas()
 {
     int i,j;
-    for(i=0;i<rows;i++)
+    for(i=0;i<ROWS;i++)
     {
-        for(j= 0;j<cols;j++)
+        for(j=0;j<COLS;j++)
         {
-            canvas[i][j] = '_';
+            canvas[i][j]='_';
         }
     }
 }
 
-#include <stdio.h>
-
+/* Display canvas */
 void displayCanvas()
 {
     int i,j;
-    for(i=0;i<rows;i++)
+    for(i=0;i<ROWS;i++)
     {
-        for(j=0;j<cols;j++)
+        for(j=0;j<COLS;j++)
         {
             printf("%c",canvas[i][j]);
         }
@@ -28,109 +31,90 @@ void displayCanvas()
     }
 }
 
-#include <stdlib.h>
-
-void drawLine(int x1, int y1, int x2, int y2)
+/* DDA Line Drawing */
+void drawLine(int x1,int y1,int x2,int y2)
 {
-    int dx = x2 - x1;
-    int dy = y2 - y1;
-
+    int dx=x2-x1;
+    int dy=y2-y1;
     int steps;
 
-    if(abs(dx) > abs(dy))
-        steps = abs(dx);
+    if(abs(dx)>abs(dy))
+        steps=abs(dx);
     else
-        steps = abs(dy);
+        steps=abs(dy);
+    float xIncrement=dx/(float)steps;
+    float yIncrement=dy/(float)steps;
+    float x=x1;
+    float y=y1;
+    int i;
 
-    float xIncrement = dx / (float)steps;
-    float yIncrement = dy / (float)steps;
-
-    float x = x1;
-    float y = y1;
-
-    for(int i = 0; i <= steps; i++)
+    for(i=0;i<=steps;i++)
     {
-        if((int)y >= 0 && (int)y < ROWS &&
-           (int)x >= 0 && (int)x < COLS)
+        if((int)x>=0 && (int)x<COLS && (int)y>=0 && (int)y<ROWS)
         {
-            canvas[(int)y][(int)x] = '*';
+            canvas[(int)y][(int)x]='*';
         }
-
-        x += xIncrement;
-        y += yIncrement;
+        x+=xIncrement;
+        y+=yIncrement;
     }
 }
 
-void drawRectangle(int x, int y, int width, int height)
+/* Rectangle */
+void drawRectangle(int x,int y,int width,int height)
 {
-    // Top edge
-    drawLine(x, y, x + width, y);
-
-    // Bottom edge
-    drawLine(x, y + height, x + width, y + height);
-
-    // Left edge
-    drawLine(x, y, x, y + height);
-
-    // Right edge
-    drawLine(x + width, y, x + width, y + height);
+    drawLine(x,y,x+width,y);
+    drawLine(x,y+height,x+width,y+height);
+    drawLine(x,y,x,y+height);
+    drawLine(x+width,y,x+width,y+height);
 }
 
-void drawTriangle(int x1, int y1,int x2, int y2,int x3, int y3)
+/* Triangle */
+void drawTriangle(int x1,int y1,int x2,int y2,int x3,int y3)
 {
     drawLine(x1, y1, x2, y2);
     drawLine(x2, y2, x3, y3);
     drawLine(x3, y3, x1, y1);
 }
 
-void plotCirclePoints(int xc, int yc, int x, int y)
+/* Helper for circle */
+void plotCirclePoints(int xc,int yc,int x,int y)
 {
-    if(yc + y >= 0 && yc + y < ROWS && xc + x >= 0 && xc + x < COLS)
-        canvas[yc + y][xc + x] = '*';
-
-    if(yc + y >= 0 && yc + y < ROWS && xc - x >= 0 && xc - x < COLS)
-        canvas[yc + y][xc - x] = '*';
-
-    if(yc - y >= 0 && yc - y < ROWS && xc + x >= 0 && xc + x < COLS)
-        canvas[yc - y][xc + x] = '*';
-
-    if(yc - y >= 0 && yc - y < ROWS && xc - x >= 0 && xc - x < COLS)
+    if(yc+y>=0 && yc+y<ROWS && xc+x>=0 && xc+x<COLS)
+        canvas[yc+y][xc+x]='*';
+    if(yc+y>=0 && yc+y<ROWS && xc-x>=0 && xc-x<COLS)
+        canvas[yc+y][xc-x] ='*';
+    if(yc-y>=0 && yc-y<ROWS && xc+x>=0 && xc+x<COLS)
+        canvas[yc-y][xc+x]='*';
+    if(yc-y>=0 && yc-y<ROWS && xc-x>=0 && xc-x<COLS)
         canvas[yc - y][xc - x] = '*';
-
-    if(yc + x >= 0 && yc + x < ROWS && xc + y >= 0 && xc + y < COLS)
-        canvas[yc + x][xc + y] = '*';
-
-    if(yc + x >= 0 && yc + x < ROWS && xc - y >= 0 && xc - y < COLS)
-        canvas[yc + x][xc - y] = '*';
-
-    if(yc - x >= 0 && yc - x < ROWS && xc + y >= 0 && xc + y < COLS)
-        canvas[yc - x][xc + y] = '*';
-
-    if(yc - x >= 0 && yc - x < ROWS && xc - y >= 0 && xc - y < COLS)
-        canvas[yc - x][xc - y] = '*';
+    if(yc+x>=0 && yc+x<ROWS && xc+y>=0 && xc+y<COLS)
+        canvas[yc+x][xc+y]='*';
+    if(yc+x>=0 && yc+x<ROWS && xc-y>=0 && xc-y<COLS)
+        canvas[yc+x][xc-y]='*';
+    if(yc-x>=0 && yc-x<ROWS && xc+y>=0 && xc+y<COLS)
+        canvas[yc-x][xc+y]='*';
+    if(yc-x>=0 && yc-x<ROWS && xc-y>=0 && xc-y<COLS)
+        canvas[yc-x][xc-y]='*';
 }
 
-void drawCircle(int xc, int yc, int r)
+/* Circle */
+void drawCircle(int xc,int yc,int r)
 {
-    int x = 0;
-    int y = r;
-
-    int p = 1 - r;
-
-    while(x <= y)
+    int x=0;
+    int y=r;
+    int p=1-r;
+    while(x<=y)
     {
-        plotCirclePoints(xc, yc, x, y);
-
+        plotCirclePoints(xc,yc,x,y);
         x++;
-
-        if(p < 0)
+        if(p<0)
         {
-            p = p + 2 * x + 1;
+            p=p+2*x+1;
         }
         else
         {
             y--;
-            p = p + 2 * x - 2 * y + 1;
+            p=p+2*x-2*y+1;
         }
     }
 }
